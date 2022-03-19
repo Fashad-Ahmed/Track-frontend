@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Grid, Paper, Button, Typography } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
-
 import Box from "@material-ui/core/Box";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import { SERVER_URL } from "../../../constants";
 import { useHistory, Link } from "react-router-dom";
-// import './styles.css';
 
 const Signup = () => {
   const history = useHistory();
@@ -23,7 +19,8 @@ const Signup = () => {
     margin: "20px auto",
   };
   const headerStyle = { margin: 0, paddingTop: 5 };
-  const btnStyle = { textAlign: "center" };
+  const btnStyle = { textAlign: "center", marginBottom: "5px" };
+  const fieldStyle = { margin: "12px 0" };
 
   const onSubmit = (e) => {
     console.log(username, email, password);
@@ -45,10 +42,10 @@ const Signup = () => {
         .catch(() => {
           console.log("Unable to add  user");
         });
-    //   history.push("/login");
+      history.push("/login");
     } catch (err) {
       console.log("User Not Registered!");
-        // history.push("/login");
+      history.push("/login");
     }
   };
 
@@ -69,6 +66,7 @@ const Signup = () => {
           id="outlined-basic"
           variant="outlined"
           label="Email"
+          style={fieldStyle}
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -78,6 +76,7 @@ const Signup = () => {
           variant="outlined"
           fullWidth
           label="Username"
+          style={fieldStyle}
           placeholder="Enter your username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -88,6 +87,7 @@ const Signup = () => {
           type="password"
           fullWidth
           label="Password"
+          style={fieldStyle}
           placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -108,6 +108,15 @@ const Signup = () => {
         >
           Sign up
         </Button>
+        <Link to="/login">
+          <Typography
+            variant="caption"
+            style={{ color: "blue", marginTop: "10px" }}
+            gutterBottom
+          >
+            Already have an account? Login
+          </Typography>
+        </Link>
       </Paper>
     </Grid>
   );

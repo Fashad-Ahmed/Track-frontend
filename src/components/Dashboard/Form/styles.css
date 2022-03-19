@@ -1,0 +1,43 @@
+.main {
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 50px;
+    background: rgba(250, 250, 250);
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 19px 38px,
+      rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    border-radius: 10px;
+  }
+
+  .button:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+  }
+  
+.css-levciy-MuiTablePagination-displayedRows {
+  margin-top: 16px;
+}
+
+.MuiTablePagination-selectLabel{
+  margin-top: 16px;
+}
+
+.outer
+{
+    width:100%;
+    text-align: center;
+}
+.inner
+{
+    display: inline-block;
+}
+
+.css-dpjnhs-MuiInputBase-root-MuiOutlinedInput-root {
+  width: 101%;
+}
+
+.css-levciy-MuiTablePagination-displayedRows{
+  color: #ffffff !important;
+  background-color: #ffffff !important;
+}
