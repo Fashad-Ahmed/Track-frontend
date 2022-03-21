@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
-
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-
 import Box from "@mui/material/Box";
-
-import { useHistory, Link } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
 import Account from "./Account/index";
 import Balance from "./Balance/index";
@@ -15,10 +11,7 @@ import { SERVER_URL } from "../../constants";
 
 const Dashboard = () => {
   const history = useHistory();
-  const [accounts, setAccounts] = useState([]);
-  const [balance, setBalance] = useState(0);
   const [tableData, setTableData] = useState([]);
-  const [transactions, setTransactions] = useState([]);
 
   const handleAdd = (e) => {
     console.log("handleAdd");
@@ -26,26 +19,23 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    fetch(SERVER_URL + `/account/${localStorage.getItem("token")}`, {
+    const user = localStorage.getItem("token");
+    console.log(user);
+    fetch(SERVER_URL + `/account/show`, {
       method: "POST",
-      headers: { "content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: user }),
     })
       .then((res) => res.json())
       .then((result) => {
-        // transactions(result);
         console.log(result);
+        setTableData(result.getAccounts);
       });
   }, []);
 
   const props = {
     tableData,
     setTableData,
-    transactions,
-    setTransactions,
-    accounts,
-    setAccounts,
-    balance,
-    setBalance,
   };
 
   return (
@@ -60,13 +50,10 @@ const Dashboard = () => {
                   <Balance {...props} />
                 </Grid>
               </div>
-              <div style={{ marginLeft: "180px"}}>
+              <div style={{ marginLeft: "180px" }}>
                 <Grid item xs={2}>
                   <Account {...props} />
                 </Grid>
-                {/* <Grid item xs={2}>
-                  <Account {...props} />
-                </Grid> */}
               </div>
             </Grid>
             <Grid container>
@@ -76,7 +63,11 @@ const Dashboard = () => {
                   color="primary"
                   size="small"
                   variant="contained"
-                  style={{ marginTop: "20px", textAlign: "center" }}
+                  style={{
+                    marginTop: "20px",
+                    textAlign: "center",
+                    marginLeft: "960px",
+                  }}
                   onClick={handleAdd}
                 >
                   Add +

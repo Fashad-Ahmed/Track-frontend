@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +19,12 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar() {
   const classes = useStyles();
+  const history = useHistory();
 
+  const handleLogOut = () => {
+    localStorage.clear();
+    history.push("/");
+  };
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -31,9 +37,26 @@ function Navbar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" color="inherit">
+          <Typography variant="h7" color="inherit">
             Expense Tracker App
           </Typography>
+          <Typography
+            variant="h8"
+            color="white"
+            style={{ marginLeft: "920px" }}
+          >
+            LogOut
+          </Typography>
+          <IconButton
+            edge="end"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            color="inherit"
+            onClick={handleLogOut}
+          >
+            <AccountCircleIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </div>
